@@ -19,26 +19,26 @@ function App() {
   }, []);
 
   const addTask = () => {
-    axios.post(url + '/create', {
+    axios.post(url + "/create",{
       description: task
     })
     .then(response => {
-      setTasks([...tasks, {id: response.data.id, description: task}]);
-      setTask('');
+      setTasks([...tasks,{id: response.data.id,description: task}])
+      setTask("")
     }).catch(error => {
-      alert(error.response.data.error ? error.response.data.error : error);
-    });
+      alert(error.response.data.error ? error.response.data.error : error)
+    })
   }
 
   const deleteTask = (id) => {
-    axios.delete(url + '/delete/' + id)
+    axios.delete(url + "/delete/" + id)
     .then(response => {
       const withoutRemoved = tasks.filter((item) => item.id !== id);
       setTasks(withoutRemoved);
     }).catch(error => {
       alert(error.response.data.error ? error.response.data.error : error);
-    });
-  }
+    })
+  };
 
   return (
       <div id='container'>
