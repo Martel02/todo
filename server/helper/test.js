@@ -1,8 +1,8 @@
 import fs from 'fs';
 import path from 'path';
 import { pool } from './db.js';
-import e from 'express';
-import { hash } from 'crypto';
+import { hash } from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
 const __dirname = import.meta.dirname;
 
@@ -13,8 +13,13 @@ const initializeTestDb = () => {
 
 const insertTestUser = (email, password) => {
   hash(password, 10, (error, hashedPassword) => {
-    [email, hashedPassword];
+    pool.query('INSERT INTO account (email, password) VALUES ($1, $2)', 
+      [email, hashedPassword]);
   })
 }
 
-export { initializeTestDb };
+const getToken = (email) => {
+  return jwt.sign({user: email}, process.env.JWT_SECRET_KEY);
+}
+
+export { initializeTestDb, insertTestUser, getToken };
