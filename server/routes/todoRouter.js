@@ -1,10 +1,15 @@
 import { pool } from '../helper/db.js';
 import { Router } from 'express';
-import { emptyOrRows } from '../helper/utils.js';
+//import { emptyOrRows } from '../helper/utils.js';
 import { auth } from '../helper/auth.js';
+import { getTasks, postTask } from '../controllers/TaskController.js';
 
 const router = Router();
 
+router.get('/', getTasks);
+router.post('/create', auth, postTask);
+
+/*
 router.get('/', (req, res, next) => {
   pool.query('SELECT * FROM task', (error, result) => {
     if (error) return next(error);
@@ -23,6 +28,7 @@ router.post('/create', auth, (req, res, next) => {
     }
   );
 });
+*/
 
 router.delete('/delete/:id', auth, (req, res, next) => {
   const id = parseInt(req.params.id);

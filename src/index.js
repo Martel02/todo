@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import Home from "./screens/Home";
-import Authentication, { AuthenticationMode } from './screens/Authentication';
+import Home from "./screens/Home.js";
+import Authentication, { AuthenticationMode } from './screens/Authentication.js';
 import ErrorPage from "./screens/ErrorPage";
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import ProtectedRoute from "./components/ProtectedRoute";
-import UserProvider from "./context/UserProvider"
+import ProtectedRoute from "./components/ProtectedRoute.js";
+import UserProvider from "./context/UserProvider.js"
 import './index.css';
 
 const router = createBrowserRouter([

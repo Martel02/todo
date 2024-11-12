@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { UserContext } from './UserContext';
+import { UserContext } from './UserContext.js';
 import axios from 'axios';
-import e from 'cors';
 
 const url = process.env.REACT_APP_API_URL;
+
 
 export default function UserProvider({ children }) {
   const userFromSessionStorage = sessionStorage.getItem('user');

@@ -13,6 +13,8 @@ create table task (
   description varchar(255) not null
 );
 
+
+
 insert into task (description) values ('Buy milk');
 
 insert into task (description) values ('Buy eggs');

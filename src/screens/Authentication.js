@@ -1,7 +1,8 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Authentication.css';
 import React from 'react';
-import { useUser } from '../context/UserContext';
+import { useUser } from '../context/useUser.js';
+
 
 export const AuthenticationMode = Object.freeze({
   Login: 'Login',
@@ -9,13 +10,13 @@ export const AuthenticationMode = Object.freeze({
 });
 
 export default function Authentication({authenticationMode})  {
-  const { user, setUser, singUp, signIn } = useUser();
+  const { user, setUser, signUp, signIn } = useUser();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      if (authenticationMode === AuthenticationMode.Login) {
+      if (authenticationMode === AuthenticationMode.Register) {
         await signUp();
         navigate('/signin');
       } else {
@@ -31,7 +32,7 @@ export default function Authentication({authenticationMode})  {
   return (
     <div>
       <h3>{authenticationMode === AuthenticationMode.Login ? 'Sign in' : 'Sign up'}</h3>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div>
           <label>Email</label>
           <input type="email" value={user.email} onChange={e => setUser({...user,email: e.target.value})}/>
@@ -44,7 +45,7 @@ export default function Authentication({authenticationMode})  {
           <button>{authenticationMode === AuthenticationMode.Login ? 'Login' : 'Submit'}</button>
         </div>
         <div>
-          <Link to={authenticationMode === AuthenticationMode.Login ? 'Login' : 'Submit'}>
+          <Link to={authenticationMode === AuthenticationMode.Login ? '/signup' : '/signin'}>
             {authenticationMode === AuthenticationMode.Login ? 'No account? Sign up' : 'Already signed up? Sign in'}
           </Link>
         </div>

@@ -1,11 +1,11 @@
-import { pool } from '../helper/db.js';
-import e, { Router } from 'express';
-import { hash, compare } from 'bcrypt';
-import jwt from 'jsonwebtoken';
-const { sign } = jwt;
+import { Router } from 'express';
+import { postLogin, postRegistration } from '../controllers/userController.js';
 
 const router = Router();
 
+router.post('/login', postLogin);
+router.post('/register', postRegistration);
+/*
 router.post('/login', (req, res, next) => {
   const invalid_message = 'Invalid credentials';
   try {
@@ -50,5 +50,5 @@ router.post('/register', async (req, res, next) => {
     }
   });
 });
-
+*/
 export default router;
